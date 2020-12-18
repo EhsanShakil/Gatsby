@@ -1,12 +1,12 @@
 import React, { ReactNode } from "react";
 import Header from "./Header";
 
-type layout = {children: ReactNode};
+type layout = {children: ReactNode, headerTitle: string};
 
-const Layout = ({ children }: layout) => {
+const Layout = ({ children, headerTitle }: layout) => {
   return (
     <div>
-      <Header title="My Application" />
+      <Header title={headerTitle} />
       {children}
     </div>
   );
