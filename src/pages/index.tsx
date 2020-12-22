@@ -2,6 +2,7 @@ import { Link } from "gatsby";
 import React from "react";
 import Layout from "../components/Layout";
 import { graphql } from "gatsby";
+import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 
 export default function Home({ data }) {
   console.log(data);
@@ -11,21 +12,30 @@ export default function Home({ data }) {
       <br />
       <Link to="/about">About</Link>
       <br />
-      <div>{ data.allContentfulBlogPost.edges.map((data, index) => <div key={index}><p> {data.node.title}</p><p> {data.node.content.raw}</p></div>)}</div>
+
+      <p>{
+          data.allContentfulBlogPost.edges[0].node.title
+        }
+      </p>
+      <p>
+        {documentToReactComponents(
+          data.allContentfulBlogPost.edges[0].node.content.raw
+        )}
+      </p>
     </Layout>
   );
 }
 export const query = graphql`
   query {
     allContentfulBlogPost {
-    edges {
-      node {
-        title
-        content {
-          raw
+      edges {
+        node {
+          title
+          content {
+            raw
+          }
         }
       }
     }
   }
-}
 `;
