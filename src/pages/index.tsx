@@ -12,15 +12,11 @@ export default function Home({ data }) {
       <br />
       <Link to="/about">About</Link>
       <br />
-
-      <p>{
-          data.allContentfulBlogPost.edges[0].node.title
-        }
-      </p>
       <p>
-        {documentToReactComponents(
+        {data.allContentfulBlogPost.edges[0].node.title}
+        {/* {documentToReactComponents(
           data.allContentfulBlogPost.edges[0].node.content.raw
-        )}
+        )} */}
       </p>
     </Layout>
   );

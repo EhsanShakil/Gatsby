@@ -19,3 +19,22 @@ exports.onCreatePage = async ({ page, actions }) => {
     createPage(page);
   }
 };
+
+exports.createPages = async ({ graphql, actions }) => {
+  const { createPage } = actions;
+  const result = await graphql(`
+    query {
+      allContentfulBlogPost {
+        edges {
+          node {
+            title
+            content {
+              raw
+            }
+          }
+        }
+      }
+    }
+  `);
+  console.log(result);
+};
