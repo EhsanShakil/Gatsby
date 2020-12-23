@@ -37,4 +37,14 @@ exports.createPages = async ({ graphql, actions }) => {
     }
   `);
   console.log(result);
+  const data = result.data.allContentfulBlogPost.edges;
+  data.map((data) => {
+    createPage({
+      path: data.node.title,
+      component: require.resolve(`./src/templates/blog-post.tsx`),
+      context: {
+        data: data.node.content.raw,
+      },
+    });
+  });
 };
