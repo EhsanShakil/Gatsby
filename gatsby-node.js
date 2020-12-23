@@ -31,6 +31,7 @@ exports.createPages = async ({ graphql, actions }) => {
             content {
               raw
             }
+            contentful_id
           }
         }
       }
@@ -43,7 +44,7 @@ exports.createPages = async ({ graphql, actions }) => {
       path: data.node.title,
       component: require.resolve(`./src/templates/blog-post.tsx`),
       context: {
-        data: data.node.content.raw,
+        data: data.node,
       },
     });
   });
